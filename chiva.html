@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+    <link rel="icon" href="ce508ebc5fea9f9423a37e8b7121afcd.jpg" type="image/x-icon">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Calculator</title>
+    <style>
+        .typewriter-container {
+            font-family: monospace;
+            white-space: nowrap;
+            overflow: hidden; /* Hide the overflowing text */
+            height: 100;
+            animation: typewriter 4s steps(40, end) forwards,
+                       blink 0.75s step-end infinite;
+        }
+
+        @keyframes typewriter {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        @keyframes blink {
+            50% { border-color: transparent; }
+        }
+
+        body {
+            background-color: #fff;
+            color: #333;
+            font-family: monospace;
+            white-space: nowrap;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            box-shadow: 12px 30px 40px white;
+            padding: 0;
+            margin: 0;
+        }
+
+        .container {
+            text-align: center;
+            margin-top: 20%;
+        }
+
+        #header1 {
+            color: lime;
+            background-color: blueviolet;
+            height: 50px;
+            align-items: baseline;
+            font-size: 30px;
+            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #180331;
+            color: white;
+            width: 80px;
+            height: 40px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: limegreen;
+        }
+
+        /* Dark Theme */
+        body.dark-mode {
+            background-color: #121212;
+            color: #f1f1f1;
+        }
+
+        body.dark-mode button {
+            background-color: #333;
+            color: #f1f1f1;
+        }
+
+        body.dark-mode button:hover {
+            background-color: #444;
+        }
+
+        #calculator {
+            margin-top: 50px;
+        }
+
+        #display {
+            width: 430px;
+            height: 20px;
+            text-align: right;
+            font-size: 24px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            background-color: skyblue;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+
+        input[type="button"] {
+            padding: 20px;
+            font-size: 15px;
+            width: 150px;
+            background-color: #000000;
+            border: 1px solid #ff9b9b;
+            color: rgb(174, 0, 255);
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="button"]:hover {
+            background-color: #004852;
+        }
+
+        input[type="button"].equal {
+            background-color: #5300be;
+            color: white;
+        }
+
+        input[type="button"].equal:hover {
+            background-color: #bbc715;
+        }
+
+        input[type="button"]:active {
+            background-color: #ccc;
+        }
+        #calculator{
+            border: 1px solid lime;
+            width: 500px;
+            height: 530px;
+            background-color: #333;
+            box-shadow: 10px 3px 19px black;
+            border-radius: 19px;
+        }
+
+    </style>
+</head>
+
+<body>
+    <center>
+        <header id="header1">
+        <div class="typewriter-container">
+            Here we got a full calculator program
+        </div>
+    </header>
+        <br><br>
+    </center>
+    <!-- Theme Toggle Button -->
+    <button id="theme-toggle" class="theme-button">Theme</button>
+    <center>
+
+
+        <div id="calculator">
+            <!-- Display Area -->
+            <input type="text" id="display" name="display" readonly>
+            <div id="buttons">
+                <input type="button" value="1" id="button" onclick="appendToDisplay('1')">
+                <input type="button" value="2" id="button" onclick="appendToDisplay('2')">
+                <input type="button" value="3" id="button" onclick="appendToDisplay('3')">
+                <br><br>
+                <input type="button" value="4" id="button" onclick="appendToDisplay('4')">
+                <input type="button" value="5" id="button" onclick="appendToDisplay('5')">
+                <input type="button" value="6" id="button" onclick="appendToDisplay('6')">
+                <br><br>
+                <input type="button" value="7" id="button" onclick="appendToDisplay('7')">
+                <input type="button" value="8" id="button" onclick="appendToDisplay('8')">
+                <input type="button" value="9" id="button" onclick="appendToDisplay('9')">
+                <br><br>
+                <input type="button" value="0" id="button" onclick="appendToDisplay('0')">
+                <input type="button" value="+" id="button" onclick="appendToDisplay('+')">
+                <input type="button" value="-" id="button" onclick="appendToDisplay('-')">
+                <br><br>
+                <input type="button" value="*" id="button" onclick="appendToDisplay('*')">
+                <input type="button" value="/" id="button" onclick="appendToDisplay('/')">
+                <input type="button" value="=" id="button" class="equal" onclick="calculateResult()">
+                <br><br>
+                <input type="button" value="Clear" id="button1" onclick="clearDisplay()">
+            </div>
+        </div>
+    </center>
+
+    <script>
+        let currentExpression = '';
+             function appendToDisplay(value) {
+            currentExpression += value;
+            document.getElementById('display').value = currentExpression;
+        }
+
+        function clearDisplay() {
+            currentExpression = '';
+            document.getElementById('display').value = '';
+        }
+
+        function calculateResult() {
+            try {
+                currentExpression = eval(currentExpression).toString();
+                document.getElementById('display').value = currentExpression;
+            } catch (e) {
+                document.getElementById('display').value = 'Error';
+                currentExpression = '';
+            }
+        }
+
+        const toggleButton = document.getElementById('theme-toggle');
+        const body = document.body;
+
+        function updateTheme() {
+            if (body.classList.contains('dark-mode')) {
+                toggleButton.textContent = 'Switch to Light Mode';
+                toggleButton.textContent = 'Light';
+            } else {
+                toggleButton.textContent = 'Drak';
+            }
+        }
+
+        // Event listener for theme toggle
+        toggleButton.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            updateTheme();
+        });
+
+        updateTheme();
+    </script>
+
+</body>
+
+</html>
